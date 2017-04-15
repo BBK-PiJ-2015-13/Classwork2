@@ -1,6 +1,7 @@
 /**
   * Created by Tom on 24/01/2017.
   */
+import scala.io.StdIn
 class Samaria {
   def printIntroductoryMessage(): Unit = {
     System.out.println("""Congratulations, you are the newest ruler of ancient Samaria, elected
@@ -14,8 +15,11 @@ class Samaria {
                          |* The market price for land fluctuates yearly.
                          |Rule wisely and you will be showered with appreciation at the end of
                          |your term. Rule poorly and you will be kicked out of office!""")
+
+    var answer = scala.io.StdIn.readLine().toInt
+
   }
-  object hammurabi {
+  object Hammurabi {
     var starved = 0            // how many people starved
     var immigrants = 5         // how many people came to the city
     var population = 100
@@ -39,7 +43,89 @@ class Samaria {
                            |      There were 0 deaths from the plague.""")
 
     }
+    def summary(starved: Int, acres: Int): Unit = {
+      var success = acres - starved
+    }
+    def landPrice(acre: Int): Unit = {
+      var cost = 17 + (scala.math.random * 6) * acre
+      cost.toInt
+    }
+    def plagueChange(population: Int): Boolean = {
+      var x = 15/100 * scala.math.random * 100
+      if (x > 15) {
+        return false
+      } else {
+        return true
+      }
+    }
+    def peopleFed(population: Int, bushels: Int) = {
+      var starved = bushels - population * 20
+    }
+    def immigration(poulation: Int, acres: Int, bushels: Int) = {
+      var immigrants = (20 * acres + bushels) / (100 * population) + 1
+    }
+    def harvest(acres: Int) = {
+      var harvestTurnOut = 1/8 * scala.math.random * acres
+    }
+    def rats(grain: Int): Int = {
+      var consume = 0.0;
+      var infestation = 2/5 * scala.math.random * 100
+      if (infestation > 40) {
+        return 0
+      } else {
+        consume = grain / ((scala.math.random * 2.0) + 1.0)
+      }
+      consume.toInt
+    }
+    def readInt(message: String): Int = {
+      try {
+        StdIn.readLine().toInt
+      } catch {
+        case _ : Throwable =>
+          println("Not an integeter.")
+          StdIn.readLine().toInt
+      }
+    }
+    def askHowMuchLandToBuy(bushels: Int, price: Int) = {
+      var acresToBuy = readInt("How many acres will you buy? ")
+      while (acresToBuy < 0 || acresToBuy * price > bushels) {
+        println("O Great Hammurabi, we have but " + bushels + " bushels of grain!")
+        acresToBuy = readInt("How many acres will you buy? ")
+      }
+      acresToBuy
+    }
+    def askHowMuchLandToSell(acres: Int, price: Int): Unit = {
+      var acresToSell = readInt("How many acres will you sell?")
+      while (acresToSell < 0) {
+        println("O Great Hammurabi, we have but " + acres + " acres of land!")
+      }
+      acresToSell
+    }
+    def askHowMuchGrainForPeople(bushels: Int, people: Int): Unit = {
+      var bushelsforPeople = readInt("How much grain will you give to the people?")
+      while (bushelsforPeople > bushels) {
+        println("O Great Hammurabi, we have but " + bushels + " bushels of grain!")
+      }
+      bushelsforPeople
+    }
+    def askHowManyAcrestoPlant(acres: Int, bushels: Int) = {
+      if (bushels < 1) {
+        println("O Great Hammurabi, we have no more bushels to sew!")
+        0
+      }
+      var acresToPlant = readInt("How many acres will you plant?")
+      while (acresToPlant > acres) {
+        println("O Great Hammurabit, we have but " + " acres of land!")
+      }
+      acresToPlant
+    }
     printIntroductoryMessage()
+    def hammurabi: Unit = {
+      printIntroductoryMessage()
+      var acresToBuy = askHowMuchLandToBuy(bushelsInStorage, pricePerAcre)
+      acresOwned = acresOwned + acresToBuy
+    }
+    Hammurabi.hammurabi
   }
 
 }
